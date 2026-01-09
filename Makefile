@@ -1,7 +1,15 @@
 PYENV_VERSION := 2.7.18/envs/senaite-dev
 BUILDOUT_CFG := /Users/voyd/Documents/repos/senaite/buildout.cfg
 
-.PHONY: buildout run init
+.PHONY: help buildout run init clone
+
+help:
+	@echo "Usage: make <target>"
+	@echo "Targets:"
+	@echo "  buildout - Build the instance"
+	@echo "  run - Run the instance"
+	@echo "  init - Initialize the instance"
+	@echo "  clone - Clone the submodules"
 
 buildout:
 	PYENV_VERSION=$(PYENV_VERSION) pyenv exec buildout -c $(BUILDOUT_CFG)
@@ -10,6 +18,21 @@ run:
 	DYLD_LIBRARY_PATH=/opt/homebrew/lib:$$DYLD_LIBRARY_PATH PYENV_VERSION=$(PYENV_VERSION) /Users/voyd/Documents/repos/senaite/bin/instance fg
 
 init:
+	@echo "Cloning all submodules in parallel..."
+	@$(MAKE) clone
+	@echo "Checking out submodules to correct branches/commits..."
+	@cd senaite.core && git checkout a7f0a07c3b426935640c357d7598d0e84b8624d2 || true
+	@cd senaite.app.listing && git checkout release-04 || true
+	@cd senaite.app.spotlight && git checkout 2.x || true
+	@cd senaite.app.supermodel && git checkout 2.x || true
+	@cd senaite.impress && git checkout 2.x || true
+	@cd senaite.jsonapi && git checkout 2.x || true
+	@cd senaite.lims && git checkout 2.x || true
+	@cd bika.ui && git checkout 2.x || true
+	@cd bika.coa && git checkout 2.x || true
+	@cd bika.reports && git checkout develop || true
+	@cd senaite.timeseries && git checkout release-04 || true
+	@echo "Submodules initialized and checked out."
 	@if ! command -v pyenv >/dev/null 2>&1; then \
 		echo "pyenv not found. Install with: brew install pyenv"; \
 		exit 1; \
@@ -33,3 +56,40 @@ init:
 	fi
 	@PYENV_VERSION=$(PYENV_VERSION) pyenv exec pip install -r /Users/voyd/Documents/repos/senaite/requirements.txt
 	@$(MAKE) buildout
+
+clone:
+	@if [ -n "$(ADDON_URL)" ] && [ -n "$(ADDON_PATH)" ]; then \
+		if [ -d "$(ADDON_PATH)" ]; then \
+			echo "Error: Directory $(ADDON_PATH) already exists."; \
+			exit 1; \
+		fi; \
+		echo "Adding new addon as submodule: $(ADDON_PATH)"; \
+		git submodule add $(ADDON_URL) $(ADDON_PATH); \
+		echo "Addon $(ADDON_PATH) added successfully."; \
+		echo "Don't forget to:"; \
+		echo "  1. Add $(ADDON_PATH) to buildout.cfg under 'develop =' and 'eggs ='"; \
+		echo "  2. Run 'make buildout'"; \
+	else \
+		echo "Cloning all submodules in parallel using git clone..."; \
+		([ ! -d senaite.core ] && git clone https://github.com/senaite/senaite.core.git senaite.core || echo "Skipping senaite.core (already exists)") & \
+		([ ! -d senaite.app.listing ] && git clone https://github.com/bikalims/senaite.app.listing.git senaite.app.listing || echo "Skipping senaite.app.listing (already exists)") & \
+		([ ! -d senaite.app.spotlight ] && git clone https://github.com/senaite/senaite.app.spotlight.git senaite.app.spotlight || echo "Skipping senaite.app.spotlight (already exists)") & \
+		([ ! -d senaite.app.supermodel ] && git clone https://github.com/senaite/senaite.app.supermodel.git senaite.app.supermodel || echo "Skipping senaite.app.supermodel (already exists)") & \
+		([ ! -d senaite.impress ] && git clone https://github.com/senaite/senaite.impress.git senaite.impress || echo "Skipping senaite.impress (already exists)") & \
+		([ ! -d senaite.jsonapi ] && git clone https://github.com/senaite/senaite.jsonapi.git senaite.jsonapi || echo "Skipping senaite.jsonapi (already exists)") & \
+		([ ! -d senaite.lims ] && git clone https://github.com/senaite/senaite.lims.git senaite.lims || echo "Skipping senaite.lims (already exists)") & \
+		([ ! -d senaite.storage ] && git clone https://github.com/senaite/senaite.storage.git senaite.storage || echo "Skipping senaite.storage (already exists)") & \
+		([ ! -d senaite.instruments ] && git clone https://github.com/bikalims/senaite.instruments.git senaite.instruments || echo "Skipping senaite.instruments (already exists)") & \
+		([ ! -d bika.ui ] && git clone https://github.com/bikalims/bika.ui.git bika.ui || echo "Skipping bika.ui (already exists)") & \
+		([ ! -d bika.coa ] && git clone https://github.com/bikalims/bika.coa.git bika.coa || echo "Skipping bika.coa (already exists)") & \
+		([ ! -d bika.extras ] && git clone https://github.com/bikalims/bika.extras.git bika.extras || echo "Skipping bika.extras (already exists)") & \
+		([ ! -d bika.reports ] && git clone https://github.com/bikalims/bika.reports.git bika.reports || echo "Skipping bika.reports (already exists)") & \
+		([ ! -d senaite.crms ] && git clone https://github.com/bikalims/senaite.crms.git senaite.crms || echo "Skipping senaite.crms (already exists)") & \
+		([ ! -d senaite.sampleimporter ] && git clone https://github.com/bikalims/senaite.sampleimporter.git senaite.sampleimporter || echo "Skipping senaite.sampleimporter (already exists)") & \
+		([ ! -d senaite.samplepointlocations ] && git clone https://github.com/bikalims/senaite.samplepointlocations.git senaite.samplepointlocations || echo "Skipping senaite.samplepointlocations (already exists)") & \
+		([ ! -d senaite.timeseries ] && git clone https://github.com/bikalims/senaite.timeseries.git senaite.timeseries || echo "Skipping senaite.timeseries (already exists)") & \
+		([ ! -d bika.wine ] && git clone https://github.com/bikalims/bika.wine.git bika.wine || echo "Skipping bika.wine (already exists)") & \
+		([ ! -d senaite.receivedemail ] && git clone https://github.com/bikalims/senaite.receivedemail.git senaite.receivedemail || echo "Skipping senaite.receivedemail (already exists)") & \
+		wait; \
+		echo "All submodules cloned successfully."; \
+	fi
