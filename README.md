@@ -8,6 +8,22 @@ into a buildout-based Plone 5.2.15 instance.
 - Xcode Command Line Tools: `xcode-select --install`
 - Homebrew: `brew install cairo pango libffi libxml2 libxslt pkg-config zlib pyenv pyenv-virtualenv`
 
+## Repository structure
+
+Add-ons are organized in the `add-ons/` directory with the following structure:
+
+```
+add-ons/
+├── senaite/     # SENAITE-related addons (cloned from git)
+├── bika/        # Bika-related addons (cloned from git)
+└── custom/      # Custom addons (locally developed, not cloned)
+```
+
+**Folder organization:**
+- **`add-ons/senaite/`**: All addons with the `senaite.*` namespace that are cloned from git repositories
+- **`add-ons/bika/`**: All addons with the `bika.*` namespace that are cloned from git repositories
+- **`add-ons/custom/`**: Locally developed addons (e.g., `senaite.addon.test`, `senaite.samplecustom`) that are not cloned from external repositories
+
 ## Clone the repository
 
 This repository uses git submodules. Clone with the `--recursive` flag:
@@ -63,7 +79,7 @@ Then:
 2. Add the add-on egg name to `buildout.cfg` under `eggs =`
 3. Run `make buildout`
 
-Example for `senaite.samplecustom`:
+Example for `senaite.samplecustom` (located in `add-ons/custom/`):
 ```
 [buildout]
 eggs =
@@ -72,9 +88,9 @@ eggs =
   senaite.samplecustom
 
 develop =
-  senaite.core
-  senaite.lims
-  senaite.samplecustom
+  add-ons/senaite/senaite.core
+  add-ons/senaite/senaite.lims
+  add-ons/custom/senaite.samplecustom
 ```
 
 Then run:

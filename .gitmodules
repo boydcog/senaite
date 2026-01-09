@@ -1,67 +1,67 @@
 [submodule "senaite.core"]
-	path = senaite.core
+	path = add-ons/senaite/senaite.core
 	url = https://github.com/senaite/senaite.core.git
 [submodule "senaite.app.listing"]
-	path = senaite.app.listing
+	path = add-ons/senaite/senaite.app.listing
 	url = https://github.com/bikalims/senaite.app.listing.git
 	branch = release-04
 [submodule "senaite.app.spotlight"]
-	path = senaite.app.spotlight
+	path = add-ons/senaite/senaite.app.spotlight
 	url = https://github.com/senaite/senaite.app.spotlight.git
 	branch = 2.x
 [submodule "senaite.app.supermodel"]
-	path = senaite.app.supermodel
+	path = add-ons/senaite/senaite.app.supermodel
 	url = https://github.com/senaite/senaite.app.supermodel.git
 	branch = 2.x
 [submodule "senaite.impress"]
-	path = senaite.impress
+	path = add-ons/senaite/senaite.impress
 	url = https://github.com/senaite/senaite.impress.git
 	branch = 2.x
 [submodule "senaite.jsonapi"]
-	path = senaite.jsonapi
+	path = add-ons/senaite/senaite.jsonapi
 	url = https://github.com/senaite/senaite.jsonapi.git
 	branch = 2.x
 [submodule "senaite.lims"]
-	path = senaite.lims
+	path = add-ons/senaite/senaite.lims
 	url = https://github.com/senaite/senaite.lims.git
 	branch = 2.x
 [submodule "senaite.storage"]
-	path = senaite.storage
+	path = add-ons/senaite/senaite.storage
 	url = https://github.com/senaite/senaite.storage.git
 [submodule "senaite.instruments"]
-	path = senaite.instruments
+	path = add-ons/senaite/senaite.instruments
 	url = https://github.com/bikalims/senaite.instruments.git
 [submodule "bika.ui"]
-	path = bika.ui
+	path = add-ons/bika/bika.ui
 	url = https://github.com/bikalims/bika.ui.git
 	branch = 2.x
 [submodule "bika.coa"]
-	path = bika.coa
+	path = add-ons/bika/bika.coa
 	url = https://github.com/bikalims/bika.coa.git
 	branch = 2.x
 [submodule "bika.extras"]
-	path = bika.extras
+	path = add-ons/bika/bika.extras
 	url = https://github.com/bikalims/bika.extras.git
 [submodule "bika.reports"]
-	path = bika.reports
+	path = add-ons/bika/bika.reports
 	url = https://github.com/bikalims/bika.reports.git
 	branch = develop
 [submodule "senaite.crms"]
-	path = senaite.crms
+	path = add-ons/senaite/senaite.crms
 	url = https://github.com/bikalims/senaite.crms.git
 [submodule "senaite.sampleimporter"]
-	path = senaite.sampleimporter
+	path = add-ons/senaite/senaite.sampleimporter
 	url = https://github.com/bikalims/senaite.sampleimporter.git
 [submodule "senaite.samplepointlocations"]
-	path = senaite.samplepointlocations
+	path = add-ons/senaite/senaite.samplepointlocations
 	url = https://github.com/bikalims/senaite.samplepointlocations.git
 [submodule "senaite.timeseries"]
-	path = senaite.timeseries
+	path = add-ons/senaite/senaite.timeseries
 	url = https://github.com/bikalims/senaite.timeseries.git
 	branch = release-04
 [submodule "bika.wine"]
-	path = bika.wine
+	path = add-ons/bika/bika.wine
 	url = https://github.com/bikalims/bika.wine.git
 [submodule "senaite.receivedemail"]
-	path = senaite.receivedemail
+	path = add-ons/senaite/senaite.receivedemail
 	url = https://github.com/bikalims/senaite.receivedemail.git
