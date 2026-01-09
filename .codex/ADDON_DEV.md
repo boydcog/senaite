@@ -24,6 +24,19 @@ Run/Install
 - Start the instance with `bin/instance fg`.
 - Log into Plone, go to Site Setup -> Add-ons, and install the add-on.
 
+How to add an existing SENAITE add-on (local folder)
+- Clone or create the add-on at the repo root, e.g. `senaite.samplecustom/`.
+- Ensure the package name matches the egg (e.g. `senaite.samplecustom`).
+- Add it to `buildout.cfg`:
+  - `develop =` add the folder name.
+  - `eggs =` add the egg name.
+- Run `make buildout`.
+- Restart the server and install via Site Setup -> Add-ons.
+
+How to add a pip-installed add-on (no local source)
+- Add the egg to `buildout.cfg` under `eggs =`.
+- Re-run buildout and restart the instance.
+
 Feature development guide
 
 Add a browser view (custom page or JSON)
