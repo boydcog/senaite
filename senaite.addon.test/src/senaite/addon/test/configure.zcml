@@ -1,0 +1,12 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <genericsetup:registerProfile
+      name="default"
+      title="SENAITE Test Add-on"
+      directory="profiles/default"
+      description="Installs the SENAITE test add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>
